@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PurchaseID__c</fullName>
+    <description>PurchaseID</description>
+    <displayFormat>P-{00000}</displayFormat>
+    <externalId>false</externalId>
+    <label>PurchaseID</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>

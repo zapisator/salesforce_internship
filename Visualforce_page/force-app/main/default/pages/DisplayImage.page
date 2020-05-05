@@ -1,0 +1,14 @@
+<apex:page showHeader="false">
+	<head>
+		<meta charset="utf-8">
+		</meta>
+		<title>
+			Display image
+		</title>
+	</head>
+	<body>
+			<apex:image
+				url="https://developer.salesforce.com/files/salesforce-developer-network-logo.png">
+			</apex:image>
+	</body>
+</apex:page>

@@ -1,0 +1,8 @@
+<apex:page standardController="Contact">
+	<h1>Create a Visualforce page which shows a basic Contact record</h1>
+	<apex:pageBlock>
+		{! Contact.FirstName}
+		{! Contact.LastName}
+		{! Contact.Owner.Email}
+	</apex:pageBlock>
+</apex:page>

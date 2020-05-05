@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Boxes &amp; Combos</fullName>
+        <default>false</default>
+        <label>Boxes &amp; Combos</label>
+    </customValue>
+    <customValue>
+        <fullName>Notebooks/Journals</fullName>
+        <default>false</default>
+        <label>Notebooks/Journals</label>
+    </customValue>
+    <customValue>
+        <fullName>Outlet</fullName>
+        <default>false</default>
+        <label>Outlet</label>
+    </customValue>
+    <customValue>
+        <fullName>Planners</fullName>
+        <default>false</default>
+        <label>Planners</label>
+    </customValue>
+    <customValue>
+        <fullName>Printable - Digital products</fullName>
+        <default>false</default>
+        <label>Printable - Digital products</label>
+    </customValue>
+    <customValue>
+        <fullName>Workshops</fullName>
+        <default>false</default>
+        <label>Workshops</label>
+    </customValue>
+    <description>Goods for office work with paper, skissors, pens etc.</description>
+    <masterLabel>Stationery</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

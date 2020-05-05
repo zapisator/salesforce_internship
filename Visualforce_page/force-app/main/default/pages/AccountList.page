@@ -1,0 +1,18 @@
+<apex:page standardController="Account" recordSetVar="Accounts">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Quick Start: Visualforce</title>
+		<!-- Import the Design System style sheet -->
+		<apex:slds />
+	</head>
+	<apex:pageblock>
+		<apex:repeat var="a" value="{!Accounts}" rendered="true" id="account_list">
+			<li>
+				<apex:outputLink value="/{!a.ID}" >
+					<apex:outputText value="{!a.Name}"/>
+				</apex:outputLink>
+			</li>
+		</apex:repeat>
+	</apex:pageblock>
+</apex:page>

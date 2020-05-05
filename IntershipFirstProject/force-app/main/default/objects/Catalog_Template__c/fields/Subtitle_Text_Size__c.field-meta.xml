@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subtitle_Text_Size__c</fullName>
+    <externalId>false</externalId>
+    <label>Subtitle Text Size</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>18px</fullName>
+                <default>false</default>
+                <label>18px</label>
+            </value>
+            <value>
+                <fullName>24px</fullName>
+                <default>false</default>
+                <label>24px</label>
+            </value>
+            <value>
+                <fullName>36px</fullName>
+                <default>true</default>
+                <label>36px</label>
+            </value>
+            <value>
+                <fullName>48px</fullName>
+                <default>false</default>
+                <label>48px</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
