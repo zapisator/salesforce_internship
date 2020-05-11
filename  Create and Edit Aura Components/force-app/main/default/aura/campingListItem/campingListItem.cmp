@@ -3,38 +3,6 @@
 		name		= "item"
 		type		= "Camping_Item__c"
 		required	= "true"
-		default		= "
-		{
-			Name		: 'Tent',
-			Price__c	: 100,
-			Quantity__c	: 1,
-			Packed__c	: true
-		}"
 	/>
-	<p>
-		Name:		{!v.item.Name}
-	</p>
-	<p>
-		Price:	
-		<lightning:formattedNumber>
-			value	= "{!v.item.Price__c}"
-			style	= "currency"
-		</lightning:formattedNumber>
-	</p>
-	<p>
-		Quantity:
-		<lightning:formattedNumber>
-			value	= "{!v.item.Quantity__c}"
-			style	= "currency"/>'
-		</lightning:formattedNumber>
-	</p>
-	<p>
-		Packed:
-		<lightning:input>
-			type	= "toggle"
-			label	= "Packed?"
-			name	= "Packed"
-			checked	= "{!v.item.Packed__c}"
-		</lightning:input>
-	</p>
+	
 </aura:component>	

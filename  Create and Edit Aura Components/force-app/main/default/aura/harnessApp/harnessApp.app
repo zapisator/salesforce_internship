@@ -1,5 +1,7 @@
-<aura:application>
-	<c:campingListItem/>
-	<!-- <c:helloWorld/>
-	<c:camping/> -->
+<aura:application extends="force:slds">
+	<!-- <c:campingListItem/> -->
+	<!-- <c:helloMessageInteractive /> -->
+	<c:campingHeader/>
+	<c:campingList/>
+	
 </aura:application>
