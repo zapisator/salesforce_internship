@@ -1,0 +1,94 @@
+<aura:component>
+	<aura:attribute
+		name				= "isAuthorized"
+		type				= "Boolean"
+		default				= "false"
+	/>
+	<aura:attribute
+		name				= "withdrawel"
+		type				= "Dispenser_account__c"
+	/>
+
+	<div
+		aria-labelledby		= "newwithdrawelform">
+	<!-- BOXED AREA -->
+		<fieldset
+			class	=
+				"slds-box slds-theme--default slds-container--small">
+			<legend
+				id		= "newwithdrawelform"
+				class	= "slds-text-heading--small 
+					slds-p-vertical--medium">
+					Enter cash amount to withdraw
+			</legend>
+
+		<!-- CREATE NEW EXPENSE FORM -->
+			<form
+				class	= "slds-form--stacked">
+
+				<lightning:input
+					type		= "number"
+					aura:id		= "withdrawelform"
+					label		= "Withdrawel amount"
+					name		= "withdrawelamount"
+					min			= "1"
+					formatter	= "currency"
+					step		= "1"
+					value		= "{! v.withdrawel.Withdraw__c }"
+					messageWhenRangeUnderflow	=	
+						"Enter an integer greater than zero."
+				/>
+
+				<lightning:select
+					aura:id		= "withdrawelform"
+					label		= "Select currency"
+					name		= "select currency"
+					required	= "true"
+					value		= "{! v.withdrawel.Currency_type__c }">
+					<option
+						value	= "">
+						choose one...
+					</option>
+					<option
+						value	= "RUB">
+						RUB
+					</option>
+					<option
+						value	= "BYN">
+						BYN
+					</option>
+					<option
+						value	= "USD">
+						USD
+					</option>
+				</lightning:select>
+
+				<lightning:button
+					label		= "Withdraw" 
+					class		= "slds-m-top--medium"
+					variant		= "brand"
+					onclick		= "{! c.clickWithdraw }"
+				/>
+
+				<lightning:button
+					label		= "Balance" 
+					class		= "slds-m-top--medium"
+					variant		= "brand"
+					onclick		= "{! c.clickBalance }"
+				/>
+
+				<lightning:button
+					label		= "Remove card" 
+					class		= "slds-m-top--medium"
+					variant		= "brand"
+					onclick		= "{! c.clickRemoveCard }"
+				/>
+
+			</form>
+
+		<!-- / CREATE NEW EXPENSE FORM -->
+
+		</fieldset>
+	<!-- / BOXED AREA -->
+	</div>
+</aura:component>	

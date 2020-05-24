@@ -1,0 +1,70 @@
+<aura:component>
+
+<aura:attribute
+	name		= "newItem"
+	type		= "Camping_Item__c"
+	default		= "
+	{
+		'sobjectType'	: 'Camping_Item__c',
+		'Name'			: '',
+		'Quantity__c'	: 0,
+		'Price__c'		: 0.00,
+		'Packed__c'		: false,
+	}"
+/>
+
+	<div aria-labelledby="newitemform">
+		<fieldset class=
+			"slds-box slds-theme--default slds-container--small">
+				<legend
+					id		= "newitemform"
+					class 	= "slds-text-heading--small
+						slds-p-vertical--medium">
+					Add camping item
+				</legend>
+			<form class="slds-form--stacked">
+				<lightning:input
+					aura:id = "itemform"
+					label="Item name"
+					name="itemname"
+					value="{! v.newItem.Name }"
+					required="true"	
+				/>
+				<lightning:input
+					type="number"
+					aura:id = "itemform"
+					label="Quantity"
+					name="itemamount"
+					min="1"
+					formatter="decimal"
+					value = "{! v.newItem.Quantity__c }"
+					messageWhenRangeUnderflow=
+						"Enter an iteger grater than 1"
+				/>
+				<lightning:input
+					type="number"
+					aura:id = "itemform"
+					label="Price"
+					name="itemprice"
+					min="0.00"
+					step="0.01"
+					formatter="currency"
+					value = "{! v.newItem.Price__c }"
+				/>
+				<lightning:input
+					type="checkbox"
+					aura:id="itemform"
+					label="Packed?"
+					name="itempacked"
+					checked="{! v.newItem.Packed__c }"
+				/>
+				<lightning:button
+					label="Add item"
+					class="slds-m-top--medium"
+					variant="brand"
+					onclick="{! c.clickCreateItem }"
+				/>
+			</form>
+		</fieldset>
+	</div>
+</aura:component>	

@@ -1,33 +1,56 @@
 <aura:component>
-	<aura:handler	name="init"			value="{!this}" action="{!c.doInit}"/>
-	<aura:attribute	name="formatdate"	type="Date"/>
-	<aura:attribute	name="expense"		type="Expense__c"/>
+
+	<aura:handler
+		name		= "init"
+		value		= "{! this }"
+		action		= "{! c.doInit }"
+	/>
+
+	<aura:attribute
+		name		= "formatdate"
+		type		= "Date"
+	/>
+	<aura:attribute
+		name		= "expense"
+		type		= "Expense__c"
+	/>
+
+	<aura:registerEvent
+		name		= "updateExpense"
+		type		= "c:expensesItemUpdate"
+	/>
 
 	<lightning:card
-		title		="{!v.expense.Name}"
-		iconName	="standard:scan_card"
-		class		="{!v.expense.Reimbursed__c ? 'slds-theme--success' : ''}">
+		title		= "{! v.expense.Name }"
+		iconName	= "standard:scan_card"
+		class		=
+			"{! v.expense.Reimbursed__c ? 'slds-theme--success' : '' }">
 
-		<aura:set attribute="footer">
+		<aura:set
+			attribute	=	"footer">
 			<p>
 				Date:
 				<lightning:formattedDateTime
-					value	="{!v.formatdate}"/>
+					value	= "{! v.formatdate }"
+				/>
 			</p>
 			<p class="slds-text-title">
 				<lightning:relativeDateTime
-					value	="{!v.formatdate}"/>
+					value	= "{! v.formatdate }"
+				/>
 			</p>
 		</aura:set>
 
 		<p class="slds-text-heading--medium slds-p-horizontal--small">
 			Amount:
 			<lightning:formattedNumber 
-				value	= "{!v.expense.Amount__c}"
-				style	= "currency"/>
+				value	= "{! v.expense.Amount__c }"
+				style	= "currency"
+			/>
 		</p>
-		<p class="slds-p-horizontal--small">
-			Client: {!v.expense.Client__c}
+		<p
+			class	= "slds-p-horizontal--small">
+			Client: {! v.expense.Client__c }
 		</p>
 		<p>
 			<lightning:input
@@ -38,7 +61,8 @@
 				checked					= "{!v.expense.Reimbursed__c}"
 				messageToggleActive		= "Yes"
 				messageToggleInactive	= "No"
-				onchange				= "{!c.clickReimbursed}"/>
+				onchange				= "{! c.clickReimbursed }"
+			/>
 		</p>
 	</lightning:card>
 </aura:component>

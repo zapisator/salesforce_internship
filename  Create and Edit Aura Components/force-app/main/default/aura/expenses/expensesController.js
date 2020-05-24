@@ -1,38 +1,72 @@
 ({
 
-	clickCreate: function(component, event, helper)
+	handleCreateExpense: function(component, event, helper)
 	{
-		var		validExpense;
-		var		expenseForm;
-		var		newExpense;
+		var			newExpense;
+
+		newExpense = event.getParam("expense");
+		helper.createExpense(component, newExpense);
+	},
+
+	handleUpdateExpense:	function(component, event, helper)
+	{
+		var			updatedExpense;
 		
-		expenseForm = component.find('expenseform');
-		validExpense = expenseForm.reduce(helper.reducer, true);
-		// If we pass error checking, do some real work
-		if (validExpense)
+		updatedExpense = event.getParam("expense");
+		helper.updateExpense(component, updatedExpense);
+	},
+
+	doInit: 				function(component, event, helper)
+	{
+		var			actionGetExpense;
+
+		// console.log("Init actionGetExpense. Before actions.");
+		actionGetExpense = component.get("c.getExpenses");
+		// console.log("Got actionGetExpense: " + JSON.stringify(actionGetExpense));
+		actionGetExpense.setCallback(this, function(response)
 		{
-			// Create the new expense
-			newExpense = component.get("v.newExpense");
-			console.log("Create expense: " + JSON.stringify(newExpense));
-			helper.createExpense(component, newExpense);
-		}
-	}
+			var		state;
+
+			state = response.getState();
+			if (state === "SUCCESS")
+				component.set("v.expenses", response.getReturnValue());
+			else
+				console.log("Failed with state: " + state);
+		});
+		// console.log("Init actionGetExpense. Before enqueueing.");
+		$A.enqueueAction(actionGetExpense);
+		// console.log("Init actionGetExpense. Before actions.");
+
+		/*
+		** Auxiliar code.
+		*/
+		// function(response)
+		// {
+		// 	var		state;
+
+		// 	state = response.getState();
+		// 	if (state === "SUCCESS")
+		// 		component.set("v.expenses", response.getReturnValue());
+		// 	else
+		// 		console.log("Failed with state: " + state);
+		// };
+	},
+
 })
 
-// ({
-//     clickCreate: function(component, event, helper) {
-//         var validExpense = component.find('expenseform').reduce(function (validSoFar, inputCmp) {
-//             // Displays error messages for invalid fields
-//             inputCmp.showHelpMessageIfInvalid();
-//             return validSoFar && inputCmp.get('v.validity').valid;
-//         }, true);
-//         // If we pass error checking, do some real work
-//         if(validExpense){
-//             // Create the new expense
-//             var newExpense = component.get("v.newExpense");
-//             console.log("Create expense: " + JSON.stringify(newExpense));
-//             helper.createExpense(component, newExpense);
-//         }
-//     }
-// })
-
+// function(response)
+// 		{
+// 			var			state;
+// 			var			expenses;
+			
+// 			console.log("Response var: " + JSON.stringify(response));
+// 			state = response.getState();
+// 			if (state === "SUCCESS")
+// 			{
+// 				expenses = component.get("v.expenses");
+// 				expenses.push(response.getReturnValue());
+// 				component.set("v.expenses", expenses);
+// 			}
+// 			else
+// 				console.log("Failed with state: " + state);
+// 		}

@@ -13,6 +13,5 @@
 				<h2 class="slds-text-heading--medium">My camping items</h2>
 			</div>
 		</lightning:layoutItem>
-	<!-- <h1>Camping List</h1> -->
 	</lightning:layout>
 </aura:component>	

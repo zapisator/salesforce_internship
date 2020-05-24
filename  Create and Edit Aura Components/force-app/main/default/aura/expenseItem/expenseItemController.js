@@ -1,4 +1,5 @@
 ({
+
 	doInit : function(component, event, helper)
 	{
 		var mydate;
@@ -7,4 +8,21 @@
 		if (mydate)
 			component.set("v.formatdate", new Date(mydate));
 	},
+
+	clickReimbursed: function(component, event, helper)
+	{
+		var		expense;
+		var		updateEvent;
+		var		params;
+		
+		expense = component.get("v.expense");
+		updateEvent = component.getEvent("updateExpense");
+		params =
+		{
+			"expense"	: expense
+		};
+		updateEvent.setParams(params);
+		updateEvent.fire();
+	}
+	
 })

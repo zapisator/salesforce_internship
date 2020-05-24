@@ -1,29 +1,72 @@
 ({
-	createExpense: function(component, expense)
+
+	createExpense:			function(component, expense)
 	{
-		var			theExpenses;
-		var			newExpense;
+		this.saveUserSideExpense(component, expense, responseFunction);
+
+		function responseFunction(response)
+		{
+			var			state;
+			var			expenses;
+			
+			state = response.getState();
+			if (state === "SUCCESS")
+			{
+				expenses = component.get("v.expenses");
+				expenses.push(response.getReturnValue());
+				component.set("v.expenses", expenses);
+			}
+			else
+				console.log("Failed with state: " + state);
+		};
+	},
+
+	updateExpense:			function(component, expense)
+	{
+		this.saveUserSideExpense(component, expense);
+	},
+
+	saveUserSideExpense:	function(component, expense, callbackFunction)
+	{
+		var			savedExpense;
+		var			params;
 		
-		theExpenses = component.get("v.expenses");
-
-		/*
-		**	Copy the expense to a new object
-		**	THIS IS A DISGUSTING, TEMPORARY HACK
-		*/
-		newExpense = JSON.parse(JSON.stringify(expense));
- 
-		console.log("Expenses before 'create': " + JSON.stringify(theExpenses));
-		theExpenses.push(newExpense);
-		component.set("v.expenses", theExpenses);
-		console.log("Expenses after 'create': " + JSON.stringify(theExpenses));
+		savedExpense = component.get("c.saveExpense");
+		params =
+		{
+			"expense"	: expense
+		};
+		savedExpense.setParams(params);
+		if (callbackFunction)
+			savedExpense.setCallback(this, callbackFunction);
+		$A.enqueueAction(savedExpense);
 	},
-	reducer:	function (validSoFar, inputCmp)
+
+	// updateViewExpenses:		function(component, response)
+	// {
+	// 	var			state;
+	// 	var			expenses;
+		
+	// 	state = response.getState();
+	// 	if (state === "SUCCESS")
+	// 	{
+	// 		expenses = component.get("v.expenses");
+	// 		expenses.push(response.getReturnValue());
+	// 		component.set("v.expenses", expenses);
+	// 	}
+	// 	else
+	// 		console.log("Failed with state: " + state);
+	// },
+
+	initViewExpenses:		function(response)
 	{
-		var		validity;
+		var		state;
 
-		// Displays error messages for invalid fields
-		inputCmp.showHelpMessageIfInvalid();
-		validity = inputCmp.get('v.validity').valid;
-		return validSoFar && validity;
+		state = response.getState();
+		if (state === "SUCCESS")
+			component.set("v.expenses", response.getReturnValue());
+		else
+			console.log("Failed with state: " + state);
 	},
+
 })

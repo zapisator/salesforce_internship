@@ -1,0 +1,87 @@
+<aura:component
+	controller		= "dispenserController">
+	<aura:attribute
+		name				= "isAuthorized"
+		type				= "Boolean"
+		default				= "false"
+	/>
+	<aura:attribute
+		name				= "withdrawel"
+		type				= "Dispenser_account__c"
+		default				= 
+		"{
+			'sobjectType'				: 'Dispenser_account__c',
+			'Name'						: '',
+			'Balance__c'				: 0,
+			'Currency_type__c'			: '',
+			'Card_number__c'			: '',
+			'PIN__c'					: '',
+			'Is_credit_card__c'			: false,
+			'maximum_loan_amount__c'	: 0,
+			'Withdraw__c'				: 0,
+		}">
+	</aura:attribute>
+
+	<div
+		aria-labelledby		= "newwithdrawelform">
+		<!-- BOXED AREA -->
+		<fieldset
+			class	=
+				"slds-box slds-theme--default slds-container--small">
+			<legend
+				id		= "newwithdrawelform"
+				class	= "slds-text-heading--small 
+					slds-p-vertical--medium">
+					Enter your card number and PIN
+			</legend>
+
+		<!-- CREATE NEW EXPENSE FORM -->
+			<form
+				class	= "slds-form--stacked">
+
+				<lightning:input
+					aura:id		= "withdrawelform"
+					label		= "Card number"
+					name		= "cardnumber"
+					placeholder	= "00000000"
+					required	= "true"
+					maxlength	= "10"
+					format		= "##### #####"
+					value		= "{! v.withdrawel.Card_number__c }"
+				/>
+
+				<lightning:input
+					type		= "password"
+					aura:id		= "withdrawelform"
+					label		= "PIN"
+					name		= "pin"
+					placeholder	= "****"
+					required	= "true"
+					maxlength	= "4"
+					value		= "{! v.withdrawel.PIN__c }"
+				/>
+
+				<lightning:button
+					label		= "Enter" 
+					class		= "slds-m-top--medium"
+					variant		= "brand"
+					onclick		= "{! c.clickAuthorize }"
+				/>
+
+			</form>
+
+		<!-- / CREATE NEW EXPENSE FORM -->
+
+		</fieldset>
+	<!-- / BOXED AREA -->
+	</div>
+
+	<aura:if
+		isTrue	= "{! v.isAuthorized }">
+		<c:dispenserWithdrawForm
+			withdrawel		= "{! v.withdrawel }"
+			isAuthorized	= "{! v.isAuthorized }"
+		/>
+	</aura:if>
+
+</aura:component>	
