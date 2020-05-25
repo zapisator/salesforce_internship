@@ -1,0 +1,72 @@
+<aura:component>
+	<aura:attribute
+		name					= "isRrequestedBalance"
+		type					= "Boolean"
+	/>
+	<aura:attribute
+		name					= "withdrawel"
+		type					= "Dispenser_account__c"
+	/>
+	<aura:attribute
+		name					= "bankConfiguration"
+		type					= "Dispenser_bank__c"
+	/>
+
+	<lightning:layout 
+		class					=
+			"slds-page-header slds-page-header--object-home">
+
+		<lightning:layoutItem>
+			<lightning:icon
+				iconName		= "action:preview"
+				alternativeText	= "Your Balance"
+			/>
+		</lightning:layoutItem>
+
+		<lightning:layoutItem
+			padding				= "horizontal-small">
+			<div
+				class			= "page-section page-header">
+				<h1
+					class		= "slds-text-heading--label">
+					{! v.withdrawel.Currency_type__c }
+				</h1>
+				<h2
+					class		= "slds-text-heading--medium">
+					{! v.withdrawel.Balance__c }
+				</h2>
+
+			</div>
+		</lightning:layoutItem>
+		<lightning:layoutItem
+			padding				= "horizontal-small">
+			<div
+				class			= "page-section page-header">
+				<h1
+					class		= "slds-text-heading--label">
+					{! 'Exchange rate RUB/BYN, (%): ' +
+						v.bankConfiguration.BYN_exchange_rate__c }
+					<br/>
+					{! 'Exchange rate RUB/USD, (%): ' +
+						v.bankConfiguration.USD_exchange_rate__c }
+				</h1>
+				<aura:if
+					isTrue		= "{! v.bankConfiguration.Id !=
+						v.withdrawel.Bank_owner__c}">
+					<h2
+						class		= "slds-text-heading--medium">
+						{! 'Commission, (%): ' +
+							v.bankConfiguration.Transfer_commision__c }
+					</h2>
+				</aura:if>
+				<h2
+					class		= "slds-text-heading--medium">
+					{! 'Maximum loan amount, (RUB): ' +
+						v.withdrawel.maximum_loan_amount__c }
+				</h2>
+			</div>
+			
+		</lightning:layoutItem>
+
+	</lightning:layout>
+</aura:component>	

@@ -1,5 +1,6 @@
-({
-	validateUserInfo:	function(component)
+({	
+
+	validateUserInfo:		function(component)
 	{
 		var		isValidUserInfo;
 		var		userInfoForm;
@@ -9,15 +10,25 @@
 		return (isValidUserInfo);
 	},
 
-	getUserInfo:		function(component)
+	reducer:				function (validSoFar, inputCmp)
+	{
+		var		validity;
+
+		inputCmp.showHelpMessageIfInvalid();
+		validity = inputCmp.get('v.validity').valid;
+		return (validSoFar && validity);
+	},
+
+	getUserInfo:			function(component)
 	{
 		var		actionGetAccount;
 
 		actionGetAccount = component.get("c.getAccount");
-		this.configureParams(component, actionGetAccount);
+		this.configureAccountParams(component, actionGetAccount);
 		actionGetAccount.setCallback(this, responseFunction);
-		console.log("enqueueAction");
+		console.log("enqueueAction getUserInfo");
 		$A.enqueueAction(actionGetAccount);
+
 		/*
 		** Auxiliar functions. 
 		*/
@@ -26,12 +37,6 @@
 			var		state;
 			var		returnValue;
 
-			console.log("response: " + response);
-			console.log("response == actionGetAccount: " + (response == actionGetAccount));
-			console.log("response === actionGetAccount: " + (response === actionGetAccount));
-			console.log("typeof(response): " + typeof(response));
-			console.log("typeof(actionGetAccount): " + typeof(actionGetAccount));
-			console.log("state: " + state);
 			state = response.getState();
 			if (state === "SUCCESS")
 			{
@@ -41,16 +46,14 @@
 					component.set("v.withdrawel", returnValue);
 					component.set("v.isAuthorized", true);
 				}
-				console.log("returnValue: " + JSON.stringify(returnValue));
+				console.log("withdrawel returnValue: " + JSON.stringify(returnValue));
 			}
 			else
-				console.log("Failed with state: " + state);
-			console.log("response == actionGetAccount: " + (response == actionGetAccount));
-			console.log("response === actionGetAccount: " + (response === actionGetAccount));
+				console.log("getUserInfo failed with state: " + state);
 		};
 	},
 
-	configureParams:	function(component, actionGetAccount)
+	configureAccountParams:	function(component, actionGetAccount)
 	{
 		var		cardNumber;
 		var		PIN;
@@ -63,21 +66,117 @@
 		params =
 		{
 			cardNumber	: cardNumber,
-			PIN			: PIN
+			PIN			: PIN,
 		};
-		console.log("params: " + JSON.stringify(params));
+		console.log("account params: " + JSON.stringify(params));
 		console.log("actionGetAccount (before): " + JSON.stringify(actionGetAccount));
 		actionGetAccount.setParams(params);
 		console.log("actionGetAccount (after): " + JSON.stringify(actionGetAccount));
 	},
 
-	reducer:			function (validSoFar, inputCmp)
+	getBankInfo:			function (component)
 	{
-		var		validity;
+		var		actionGetBank;
+		var		that;
 
-		inputCmp.showHelpMessageIfInvalid();
-		validity = inputCmp.get('v.validity').valid;
-		return (validSoFar && validity);
+		actionGetBank = component.get("c.getBank");
+		this.configureBankParams(component, actionGetBank);
+		that = this;
+		actionGetBank.setCallback(this, responseFunction);
+		console.log("enqueueAction getBankInfo");
+		$A.enqueueAction(actionGetBank);
+
+		/*
+		** Auxiliar functions. 
+		*/
+		function responseFunction(response, component)
+		{
+			var		state;
+			var		returnValue;
+
+			state = response.getState();
+			if (state === "SUCCESS")
+			{
+				returnValue = response.getReturnValue();
+				if (returnValue)
+				{
+					component.set("v.bankConfiguration", returnValue);
+					console.log("bankConfiguration at component: " + JSON.stringify(component.get("v.bankConfiguration")));
+					// that.getTerminalInfo(component);
+				}
+				console.log("bankConfiguration returnValue: " + JSON.stringify(returnValue));
+				console.log("!!! bankConfiguration.ID at component: " + JSON.stringify(component.get("v.bankConfiguration.Id")));
+			}
+			else
+				console.log("getBankInfo failed with state: " + state);
+		};
 	},
 
+	configureBankParams:	function(component, actionGetBank)
+	{
+		var		bankName;
+		var		params;
+
+		bankName = component.get("v.bankConfiguration.Name");
+		console.log("bankName: " + JSON.stringify(bankName));
+		params =
+		{
+			bankName	: bankName,
+		};
+		console.log("bank params: " + JSON.stringify(params));
+		console.log("actionGetAccount (before): " + JSON.stringify(actionGetBank));
+		actionGetBank.setParams(params);
+		console.log("actionGetAccount (after): " + JSON.stringify(actionGetBank));
+	},
+
+	getTerminalInfo:		function(component)
+	{
+		var		actionGetTerminal;
+
+		actionGetTerminal = component.get("c.getTerminal");
+		this.configureTerminalParams(component, actionGetTerminal);
+		actionGetTerminal.setCallback(this, responseFunction);
+		console.log("enqueueAction getTerminalInfo");
+		$A.enqueueAction(actionGetTerminal);
+
+		/*
+		** Auxiliar functions. 
+		*/
+		function responseFunction(response)
+		{
+			var		state;
+			var		returnValue;
+
+			state = response.getState();
+			if (state === "SUCCESS")
+			{
+				returnValue = response.getReturnValue();
+				if (returnValue)
+				{
+					component.set("v.terminal", returnValue);
+				}
+				console.log("terminal returnValue: " + JSON.stringify(returnValue));
+			}
+			else
+				console.log("actionGetTerminal failed with state: " + state);
+		};
+	},
+
+	configureTerminalParams:	function(component, actionGetTerminal)
+	{
+		var		terminalBankId;
+		var		params;
+
+		// terminalBankId = component.get("v.bankConfiguration.Id");
+		terminalBankId = 'a0H5I000002PimDUAS';
+		console.log("terminalBankId: " + JSON.stringify(terminalBankId));
+		params =
+		{
+			terminalBankId	: terminalBankId,
+		}; 
+		console.log("terminal params: " + JSON.stringify(params));
+		console.log("actionGetTerminal (before): " + JSON.stringify(actionGetTerminal));
+		actionGetTerminal.setParams(params);
+		console.log("actionGetTerminal (after): " + JSON.stringify(actionGetTerminal));
+	},
 })

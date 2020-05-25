@@ -1,0 +1,69 @@
+<aura:component>
+	<aura:attribute
+		name						= "bankConfiguration"
+		type						= "Dispenser_bank__c"
+		default						=
+		"{
+			'sobjectType'		: 'Dispenser_account__c',
+			'Name'				: 'Bank_01',
+		}"
+	/>
+	<aura:attribute
+		name						= "isAuthorized"
+		type						= "Boolean"
+		default						= "false"
+	/>
+	<aura:attribute
+		name						= "isRrequestedBalance"
+		type						= "Boolean"
+		default						= "false"
+	/>
+	<aura:attribute
+		name						= "terminal"
+		type						= "Dispenser_terminal__c"
+	/>
+	<aura:attribute
+		name						= "withdrawel"
+		type						= "Dispenser_account__c"
+		default						= 
+		"{
+			'sobjectType'				: 'Dispenser_account__c',
+			'Name'						: '',
+			'Balance__c'				: 0,
+			'Currency_type__c'			: '',
+			'Card_number__c'			: '',
+			'PIN__c'					: '',
+			'Is_credit_card__c'			: false,
+			'maximum_loan_amount__c'	: 0,
+			'Withdraw__c'				: 0,
+		}">
+	</aura:attribute>
+
+	<aura:if
+		isTrue	= "{! !v.isAuthorized }">
+		<c:dispenserAuthorization
+			withdrawel				= "{! v.withdrawel }"
+			isAuthorized			= "{! v.isAuthorized }"
+			bankConfiguration		= "{! v.bankConfiguration }"
+			terminal				= "{! v.terminal }"
+		/>
+	</aura:if>
+	<aura:if
+		isTrue	= "{! v.isAuthorized }">
+		<c:dispenserWithdrawForm
+			withdrawel				= "{! v.withdrawel }"
+			isAuthorized			= "{! v.isAuthorized }"
+			isRrequestedBalance		= "{! v.isRrequestedBalance }"
+			bankConfiguration		= "{! v.bankConfiguration }"
+			terminal				= "{! v.terminal }"
+		/>
+	</aura:if>
+	<aura:if
+		isTrue	= "{! v.isRrequestedBalance }">
+		<c:dispenserBalance
+			withdrawel				= "{! v.withdrawel }"
+			isRrequestedBalance		= "{! v.isRrequestedBalance }"
+			bankConfiguration		= "{! v.bankConfiguration }"
+		/>
+	</aura:if>
+</aura:component>	

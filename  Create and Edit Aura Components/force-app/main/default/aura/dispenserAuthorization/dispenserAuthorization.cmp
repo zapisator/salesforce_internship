@@ -1,43 +1,38 @@
 <aura:component
-	controller		= "dispenserController">
+	controller					= "dispenserController">
 	<aura:attribute
-		name				= "isAuthorized"
-		type				= "Boolean"
-		default				= "false"
+		name					= "isAuthorized"
+		type					= "Boolean"
+		default					= "false"
 	/>
 	<aura:attribute
-		name				= "withdrawel"
-		type				= "Dispenser_account__c"
-		default				= 
-		"{
-			'sobjectType'				: 'Dispenser_account__c',
-			'Name'						: '',
-			'Balance__c'				: 0,
-			'Currency_type__c'			: '',
-			'Card_number__c'			: '',
-			'PIN__c'					: '',
-			'Is_credit_card__c'			: false,
-			'maximum_loan_amount__c'	: 0,
-			'Withdraw__c'				: 0,
-		}">
-	</aura:attribute>
-
+		name					= "withdrawel"
+		type					= "Dispenser_account__c"
+	/>
+	<aura:attribute
+		name					= "bankConfiguration"
+		type					= "Dispenser_bank__c"
+	/>
+	<aura:attribute
+		name					= "terminal"
+		type					= "Dispenser_terminal__c"
+	/>
 	<div
-		aria-labelledby		= "newwithdrawelform">
+		aria-labelledby			= "newwithdrawelform">
 		<!-- BOXED AREA -->
 		<fieldset
-			class	=
+			class				=
 				"slds-box slds-theme--default slds-container--small">
 			<legend
-				id		= "newwithdrawelform"
-				class	= "slds-text-heading--small 
+				id				= "newwithdrawelform"
+				class			= "slds-text-heading--small 
 					slds-p-vertical--medium">
 					Enter your card number and PIN
 			</legend>
 
 		<!-- CREATE NEW EXPENSE FORM -->
 			<form
-				class	= "slds-form--stacked">
+				class			= "slds-form--stacked">
 
 				<lightning:input
 					aura:id		= "withdrawelform"
@@ -76,12 +71,6 @@
 	<!-- / BOXED AREA -->
 	</div>
 
-	<aura:if
-		isTrue	= "{! v.isAuthorized }">
-		<c:dispenserWithdrawForm
-			withdrawel		= "{! v.withdrawel }"
-			isAuthorized	= "{! v.isAuthorized }"
-		/>
-	</aura:if>
+
 
 </aura:component>	

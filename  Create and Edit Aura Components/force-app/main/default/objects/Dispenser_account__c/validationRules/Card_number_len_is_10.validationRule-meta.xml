@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Card_number_len_is_10</fullName>
+    <active>true</active>
+    <errorConditionFormula>!ISNUMBER( Card_number__c )  &amp;&amp;  (LEN( Card_number__c ) != 10)</errorConditionFormula>
+    <errorDisplayField>Card_number__c</errorDisplayField>
+    <errorMessage>It should be 10 digits.</errorMessage>
+</ValidationRule>

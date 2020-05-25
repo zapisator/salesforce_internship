@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bank_owner__c</fullName>
+    <externalId>false</externalId>
+    <label>Bank owner</label>
+    <referenceTo>Dispenser_bank__c</referenceTo>
+    <relationshipLabel>Accounts</relationshipLabel>
+    <relationshipName>Dispenser_accounts</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,23 +1,36 @@
 <aura:component>
 	<aura:attribute
-		name				= "isAuthorized"
-		type				= "Boolean"
-		default				= "false"
+		name					= "isAuthorized"
+		type					= "Boolean"
+		default					= "false"
 	/>
 	<aura:attribute
-		name				= "withdrawel"
-		type				= "Dispenser_account__c"
+		name					= "withdrawel"
+		type					= "Dispenser_account__c"
+	/>
+	<aura:attribute
+		name					= "isRrequestedBalance"
+		type					= "Boolean"
+		default					= "false"
+	/>
+	<aura:attribute
+		name					= "bankConfiguration"
+		type					= "Dispenser_bank__c"
+	/>
+	<aura:attribute
+		name					= "terminal"
+		type					= "Dispenser_terminal__c"
 	/>
 
 	<div
-		aria-labelledby		= "newwithdrawelform">
+		aria-labelledby			= "newwithdrawelform">
 	<!-- BOXED AREA -->
 		<fieldset
-			class	=
+			class				=
 				"slds-box slds-theme--default slds-container--small">
 			<legend
-				id		= "newwithdrawelform"
-				class	= "slds-text-heading--small 
+				id				= "newwithdrawelform"
+				class			= "slds-text-heading--small 
 					slds-p-vertical--medium">
 					Enter cash amount to withdraw
 			</legend>
@@ -91,4 +104,5 @@
 		</fieldset>
 	<!-- / BOXED AREA -->
 	</div>
+
 </aura:component>	

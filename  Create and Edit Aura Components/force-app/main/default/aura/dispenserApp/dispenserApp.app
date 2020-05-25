@@ -2,7 +2,6 @@
 	extends		= "force:slds" implements="force:appHostable">
 
 	<c:dispenserHeader/>
-	<c:dispenserAuthorization/>
-
+	<c:dispenser/>
 
 </aura:application>	
